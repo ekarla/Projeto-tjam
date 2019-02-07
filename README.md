@@ -7,17 +7,11 @@ WebRTC (Web Real-Time Communications) is a technology which enables Web applicat
 ## Getting Started
 Clone the project repository by running the command below if you use SSH
 
-```
-git clone git@github.com:samuelayo/pusher_webrtc.git
-```
 
-If you use https, use this instead
+
 
 ```
-git clone https://github.com/samuelayo/pusher_webrtc.git
-```
-
-Change directory into the newly cloned project and install dependencies
+ install dependencies
 
 ```
 cd pusher_webrtc
