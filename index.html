@@ -17,9 +17,6 @@
             </ul>
         </div>
     </div>
-</body>
-
-</html>
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 <script>
     var pusher = new Pusher('740d99c4c90bab3d1296', {
@@ -69,21 +66,21 @@
         document.getElementById('users').innerHTML = list;
     }
 
-    //To iron over browser implementation anomalies like prefixes
+    
     GetRTCPeerConnection();
     GetRTCSessionDescription();
     GetRTCIceCandidate();
     prepareCaller();
     function prepareCaller(){
-        //Initializing a peer connection
+        //Inicializando a conexao
         caller = new window.RTCPeerConnection();
-        //Listen for ICE Candidates and send them to remote peers
+        
         caller.onicecandidate = function(evt) {
             if (!evt.candidate) return;
             console.log("onicecandidate called");
             onIceCandidate(caller, evt);
         };
-        //onaddstream handler to receive remote feed and show in remoteview video element
+        //onaddstream mostrando o video do convidado
         caller.onaddstream = function(evt) {
             console.log("onaddstream called");
             if (window.URL) {
@@ -94,7 +91,7 @@
         };
     }
     function getCam() {
-        //Get local audio/video feed and show it in selfview video element 
+        //pegando a camera e audio local 
         return navigator.mediaDevices.getUserMedia({
             video: true,
             audio: true
@@ -120,7 +117,7 @@
         return window.RTCSessionDescription;
     }
 
-    //Create and send offer to remote peer on button click
+    //Criando um ponto atraves do botao
     function callUser(user) {
         getCam()
             .then(stream => {
@@ -166,7 +163,7 @@
         endCall();
     }
 
-    //Send the ICE Candidate to the remote peer
+    
     function onIceCandidate(peer, evt) {
         if (evt.candidate) {
             channel.trigger("client-candidate", {
@@ -186,7 +183,7 @@
 
 
 
-    //Listening for the candidate message from a peer sent from onicecandidate handler
+    
     channel.bind("client-candidate", function(msg) {
         if(msg.room==room){
             console.log("candidate received");
@@ -194,7 +191,6 @@
         }
     });
 
-    //Listening for Session Description Protocol message with session details from remote peer
     channel.bind("client-sdp", function(msg) {
         if(msg.room == id){
             
@@ -233,7 +229,7 @@
 
     });
 
-    //Listening for answer to offer sent to remote peer
+    
     channel.bind("client-answer", function(answer) {
         if(answer.room==room){
             console.log("answer received");
@@ -304,3 +300,5 @@
         box-shadow: 10px 10px 20px #000000;
     }
 </style>
+</body>
+</html>
