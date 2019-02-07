@@ -30,7 +30,7 @@
     const channel = pusher.subscribe('presence-videocall');
 
     channel.bind('pusher:subscription_succeeded', (members) => {
-        //set the member count
+        //mostrando os menbros 
         usersOnline = members.count;
         id = channel.members.me.id;
         document.getElementById("myid").innerHTML = ` My caller id is : ` + id;
@@ -49,7 +49,7 @@
     });
 
     channel.bind('pusher:member_removed', (member) => {
-        // for remove member from list:
+        // removendo da lista
         var index = users.indexOf(member.id);
         users.splice(index, 1);
         if(member.id==room){
@@ -195,7 +195,7 @@
         if(msg.room == id){
             
             console.log("sdp received");
-            var answer = confirm("You have a call from: "+ msg.from + "Would you like to answer?");
+            var answer = confirm("Voce tem uma chamada de: "+ msg.from + "Responder chamada?");
             if(!answer){
                 return channel.trigger("client-reject", {"room": msg.room, "rejected":id});
             }
@@ -240,8 +240,8 @@
 
     channel.bind("client-reject", function(answer) {
         if(answer.room==room){
-            console.log("Call declined");
-            alert("call to " + answer.rejected + "was politely declined");
+            console.log("Chamada Recusada");
+            alert("Recusada " + answer.rejected + "Encerrando Chamada");
             endCall();
         }
         
@@ -249,7 +249,7 @@
 
      channel.bind("client-endcall", function(answer) {
         if(answer.room==room){
-            console.log("Call Ended");
+            console.log("Chamada encerrada");
             endCall();
             
         }
@@ -260,12 +260,12 @@
 </script>
 <style>
     video {
-        /* video border */
+      
         border: 2px solid #606060;
         padding: 20px;
         margin: 10px;
         border-radius: 20px;
-        /* tranzitionstransitions applied to the vodeovideo element */
+       
         -moz-transition: all 1s ease-in-out;
         -webkit-transition: all 1s ease-in-out;
         -o-transition: all 1s ease-in-out;
