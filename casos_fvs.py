@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 
 
-# In[2]:
+# Funções para formatar as tabelas :
 
 
 
@@ -88,7 +88,7 @@ def geraCSV(destino,operacao,dfLeitos,csv_completo):
     
 
 
-# In[4]:
+#-------------------------------------------------------------------------------------------------------------#
 
 
 continua = 'y'
@@ -106,7 +106,7 @@ while (continua == 'y'):
         destino = input('Digite o caminho para ser salvo: ')
         dia = int(data[0]+data[1])
     
-    #gera o df
+    #Chama a função para formatar as tabelas
     
         if(dia<=5):
             dfLeitos = tabula.read_pdf(origem, area = [90,10,600,600], pages ='1',lattice = True)
@@ -126,11 +126,12 @@ while (continua == 'y'):
             
         dfLeitos = insere_data(dfLeitos,data)
     
-    #gera o csv
+    #Chama a função que gera um arquivo csv
+
         geraCSV(destino,operacao,dfLeitos,0)
     
     else:
-        
+       
         origem = input('Digite o caminho para o PDF: ')
 
         data = input('Digite a data do arquivo (DIA-MES-ANO): ')
@@ -139,7 +140,8 @@ while (continua == 'y'):
     
         dia = int(data[0]+data[1])
 
-    #cria o novo df
+    #Chama a função para formatar as tabelas
+    
         if(dia<=5):
             dfLeitos = tabula.read_pdf(origem, area = [90,10,600,600], pages ='1',lattice = True)
             dfLeitos = organiza_pdf(dfLeitos[0])
@@ -159,24 +161,15 @@ while (continua == 'y'):
             
         dfLeitos = insere_data(dfLeitos,data)
     
-        #salva o CSV
+        #chama a função que concatena os arquivos
+
         geraCSV(0,operacao,dfLeitos,csv_completo)
     
     continua = input('Realizar outra operação? (Y/n)')
     continua = continua.lower()
 
 
-# In[5]:
 
-
-#entra com o nome do pdf
-
-
-dados = pd.read_csv('dataCASOS_COVID.csv')
-dados
-
-
-# In[ ]:
 
 
 
