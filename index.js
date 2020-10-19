@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Pusher = require('pusher');
 const app = express();
 
-
+// atualização do arquivo
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
